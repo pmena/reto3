@@ -1,5 +1,6 @@
 # Bootcamp Reto3 (Pablo Mena)
 Reto 3 preparado para el bootcamp purple #bootcamp
+Se utiliza programación reactiva para implementar la api con Springboot, Webflux y mongodb.
 
 # Ejecución del reto
 
