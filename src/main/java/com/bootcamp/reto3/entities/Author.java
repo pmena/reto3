@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
 
 import java.util.Date;
 
@@ -17,9 +18,14 @@ import java.util.Date;
 public class Author {
     @Id
     private String id;
+    
+    @Field(name = "name")
     private String name;
+    @Field(name = "email")
     private String email;
+    @Field(name = "phone")
     private String phone;
+    @Field(name = "birthDate")
     private Date birthDate;
 
 }

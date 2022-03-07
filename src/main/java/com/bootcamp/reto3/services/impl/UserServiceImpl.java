@@ -17,4 +17,9 @@ public class UserServiceImpl implements UserService {
     public Mono<User> authenticate(String login, String password) {
         return this.userRepository.authenticate(login, password);
     }
+
+    @Override
+    public Mono<User> add(User user) {
+        return this.userRepository.insert(user);
+    }
 }

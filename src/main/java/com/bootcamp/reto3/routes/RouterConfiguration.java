@@ -16,7 +16,7 @@ public class RouterConfiguration {
 
     @Bean
     public RouterFunction<ServerResponse> blogRoutes(BlogHandler blogHandler){
-        return RouterFunctions.nest(RequestPredicates.path("/blogs"),
+        return RouterFunctions.nest(RequestPredicates.path("/blog"),
                 RouterFunctions
                         .route(GET(""), blogHandler::findAll));
     }
@@ -25,6 +25,16 @@ public class RouterConfiguration {
     public RouterFunction<ServerResponse> userRoutes(UserHandler userHandler){
         return RouterFunctions.nest(RequestPredicates.path("/user"),
                 RouterFunctions
+                        .route(POST("/authenticate"), userHandler::authenticate)
+                        .andRoute(POST("/add"),userHandler::add)
+        );
+    }
+
+    @Bean
+    public RouterFunction<ServerResponse> authorRoutes(UserHandler userHandler){
+        return RouterFunctions.nest(RequestPredicates.path("/author"),
+                RouterFunctions
                         .route(POST("/authenticate"), userHandler::authenticate));
     }
+
 }

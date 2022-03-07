@@ -10,7 +10,8 @@ import reactor.core.publisher.Mono;
 public interface UserRepository extends
         ReactiveMongoRepository<User, String> {
 
-    @Query("SELECT s FROM User s WHERE s.login = LOWER(:login) AND s.password = :password")
+    @Query("SELECT s FROM User s WHERE LOWER(s.login) = LOWER(':login') AND s.password = ':password'")
     Mono<User> authenticate(String login, String password);
+
 
 }

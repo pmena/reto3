@@ -19,7 +19,10 @@ public class Blog {
 
     @Field(name = "name")
     private String name;
+    @Field(name = "authorId")
     private String authorId;
+    @Field(name = "url")
     private String url;
+    @Field(name = "status")
     private String status;
 }
