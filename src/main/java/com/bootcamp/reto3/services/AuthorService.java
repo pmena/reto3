@@ -6,6 +6,7 @@ import reactor.core.publisher.Mono;
 
 public interface AuthorService {
 
+    Mono<Author> insert(String id);
     Mono<Author> findById(String id);
     Mono<Boolean> existsByEmail(String email);
     Flux<Author> findByEmail(String email);

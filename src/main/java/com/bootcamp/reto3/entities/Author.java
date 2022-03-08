@@ -8,6 +8,9 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 @Setter
@@ -17,6 +20,8 @@ import java.util.Date;
 @Document(value = "authors")
 public class Author {
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @NotNull
     private String id;
     
     @Field(name = "name")
