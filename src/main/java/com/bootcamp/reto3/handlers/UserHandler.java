@@ -28,9 +28,12 @@ public class UserHandler {
         //        .switchIfEmpty(ServerResponse.notFound().build());
 
 
+        //this.userservice.authenticate(login, password);
+        /*
         return request.bodyToMono(User.class)
-                .flatMap(blog -> this.userservice.authenticate(login, password))
-                .flatMap(blog -> ServerResponse.ok().body(Mono.just(blog), User.class));
+                .flatMap(user -> this.userservice.authenticate(login, password))
+                .flatMap(user -> ServerResponse.ok().body(Mono.just(user), User.class));
+        */
 
         /*
         return this.userservice.authenticate(login, password).then(ServerResponse.ok().build());
@@ -41,14 +44,21 @@ public class UserHandler {
                 .contentType(APPLICATION_JSON)
                 .body(userservice.authenticate(login, password), User.class);
         */
+
+        //return this.userservice.authenticate(login, password).then(ok().build());
+
+        return request.bodyToMono(User.class)
+                .map(user -> this.userservice.authenticate(login, password))
+                .then(ok().build());
+
     }
 
 
     public Mono<ServerResponse> add(ServerRequest request) {
-        var id = "";
-        var login = request.queryParam("login").get();
-        var password = request.queryParam("password").get();
-        var authorId = Integer.parseInt( request.queryParam("authorId").get());
+        String id = null;
+        String login = request.queryParam("login").get();
+        String password = request.queryParam("password").get();
+        int authorId = Integer.parseInt( request.queryParam("authorId").get());
 
         return this.userservice.add(new User(id,login, password,authorId)).then(ok().build());
     }

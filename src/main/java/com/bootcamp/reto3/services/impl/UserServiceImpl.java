@@ -15,7 +15,12 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Mono<User> authenticate(String login, String password) {
-        return this.userRepository.authenticate(login, password);
+        return this.userRepository.findAll().filter(user -> {
+            if (user.getLogin().equals(login) && user.getPassword().equals(password)) {
+                return true;
+            }
+            return false;
+        }).last();
     }
 
     @Override

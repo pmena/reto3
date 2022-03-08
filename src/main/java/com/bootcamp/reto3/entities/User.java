@@ -5,7 +5,8 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
-import java.util.Date;
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 @Getter
 @Setter
@@ -15,6 +16,8 @@ import java.util.Date;
 @Document(value="User")
 public class User {
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @NotNull
     private String id;
 
     @Field(name="login")
