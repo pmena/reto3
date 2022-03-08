@@ -3,6 +3,7 @@ package com.bootcamp.reto3.handlers;
 import com.bootcamp.reto3.entities.User;
 import com.bootcamp.reto3.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.server.ServerRequest;
 import org.springframework.web.reactive.function.server.ServerResponse;
@@ -47,9 +48,8 @@ public class UserHandler {
 
         //return this.userservice.authenticate(login, password).then(ok().build());
 
-        return request.bodyToMono(User.class)
-                .map(user -> this.userservice.authenticate(login, password))
-                .then(ok().build());
+        return ServerResponse.ok().contentType(MediaType.APPLICATION_JSON)
+                        .body(this.userservice.authenticate(login, password), User.class);
 
     }
 
@@ -60,7 +60,10 @@ public class UserHandler {
         String password = request.queryParam("password").get();
         int authorId = Integer.parseInt( request.queryParam("authorId").get());
 
-        return this.userservice.add(new User(id,login, password,authorId)).then(ok().build());
+        //return this.userservice.add(new User(id,login, password,authorId)).then(ok().build());
+
+        return ServerResponse.ok().contentType(MediaType.APPLICATION_JSON)
+                .body(this.userservice.add(new User(id,login, password,authorId)), User.class);
     }
 
 }
